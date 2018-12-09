@@ -24,6 +24,16 @@ public class GameModel {
     private double[] anOptStratB;
     private double anGameValue;
 
+    private int winsAmountA;
+    private int winsAmountB;
+
+    public int getWinsAmountA() {
+        return winsAmountA;
+    }
+
+    public int getWinsAmountB() {
+        return winsAmountB;
+    }
 
     GameModel(){
         gameMatrix = new double[2][2];
@@ -36,6 +46,8 @@ public class GameModel {
             aOptStrat[i] = 0.0;
             bOptStrat[i] = 0.0;
         }
+        winsAmountA = 0;
+        winsAmountB = 0;
 
     }
 
@@ -237,6 +249,11 @@ public class GameModel {
 
         statSumValueOfGame[0] = gameMatrix[stratA][stratB];
         statAverageValueOfGame[0] = statSumValueOfGame[0];
+        if(gameMatrix[stratA][stratB] > 0){
+            winsAmountA++;
+        }else if(gameMatrix[stratA][stratB] < 0){
+            winsAmountB++;
+        }
 
         for(int i = 1; i < gamesAmount; i++){
             //choose strategies for both players
@@ -246,8 +263,14 @@ public class GameModel {
 
             statSumValueOfGame[i] = statSumValueOfGame[i - 1] + gameMatrix[stratA][stratB];
             statAverageValueOfGame[i] = statSumValueOfGame[i] / ( i + 1 ) ;
+            if(gameMatrix[stratA][stratB] > 0){
+                winsAmountA++;
+            }else if(gameMatrix[stratA][stratB] < 0){
+                winsAmountB++;
+            }
 
         }
+
 
         debugDummy();
     }

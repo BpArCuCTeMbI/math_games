@@ -131,6 +131,10 @@ public class BrownRobinsonGameController {
         optimalStratTextArea.setText(bld.toString());
 
         game.playWithOptStrats();
+        bld = new StringBuilder(optimalStratTextArea.getText());
+        bld.append("\nFirst player won: " + game.getWinsAmountA() + " games.\n");
+        bld.append("Second player won: " + game.getWinsAmountB() + " games.\n");
+        optimalStratTextArea.setText(bld.toString());
 
         int len = game.getStatSumValueOfGame().length;
         double[] xGameAmountData = new double[len];
